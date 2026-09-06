@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade - Jogo da Forca</title>
+    <style>
+        :root {
+            --primary: #00BBF9;
+            --secondary: #FFB703;
+            --bg-body: #0F172A;
+            --bg-card: #1E293B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border-color: #334155;
+            --accent: #00F5D4;
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --primary: #0284C7;
+                --secondary: #D97706;
+                --bg-body: #F8FAFC;
+                --bg-card: #FFFFFF;
+                --text-main: #0F172A;
+                --text-muted: #64748B;
+                --border-color: #E2E8F0;
+                --accent: #0D9488;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            padding: 48px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .app-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #0F172A;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 6px 16px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .updated-date {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        ul {
+            margin-left: 24px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        li strong {
+            color: var(--secondary);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .highlight-box {
+            background-color: rgba(0, 187, 249, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 16px 12px;
+            }
+            .container {
+                padding: 24px 18px;
+                border-radius: 14px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="app-badge">Jogo da Forca Multilíngue</div>
+        <h1>Política de Privacidade</h1>
+        <p class="updated-date">Última atualização: 06 de Setembro de 2026</p>
+    </header>
+
+    <main>
+        <p>A sua privacidade é de extrema importância para nós. Esta Política de Privacidade descreve como o aplicativo <strong>Jogo da Forca Multilíngue</strong> (doravante denominado "Aplicativo"), identificado pelo pacote <code>br.com.sigs.forca</code>, coleta, utiliza e protege as informações dos seus usuários.</p>
+
+        <div class="highlight-box">
+            <p><strong>Resumo essencial:</strong> O Aplicativo não exige cadastro, não solicita nome, e-mail, telefone, CPF ou fotos para jogar. O progresso do jogo é salvo exclusivamente na memória do seu próprio aparelho celular.</p>
+        </div>
+
+        <h2>1. Informações que Coletamos</h2>
+        <p>Dividimos as informações em duas categorias:</p>
+        <ul>
+            <li><strong>Dados de Progresso do Jogo (Armazenamento Local):</strong> Pontuações, estatísticas de vitórias e derrotas, idioma selecionado e categorias completadas são armazenados localmente no seu dispositivo utilizando a memória interna (SharedPreferences). Esses dados nunca são enviados aos nossos servidores.</li>
+            <li><strong>Dados Coletados Automaticamente por Parceiros:</strong> Quando você utiliza o Aplicativo, alguns dados técnicos podem ser coletados automaticamente por serviços parceiros (como o Google AdMob) para viabilizar anúncios e verificar compras. Isso pode incluir identificadores anônimos de publicidade (Google Advertising ID), informações de rede, modelo do dispositivo e versão do sistema operacional.</li>
+        </ul>
+
+        <h2>2. Serviços de Terceiros e Publicidade</h2>
+        <p>Para manter o jogo gratuito e operacional, utilizamos os serviços de terceiros homologados pela Google:</p>
+        <ul>
+            <li><strong>Google AdMob (Google LLC):</strong> Utilizado para veiculação de anúncios (banners e telas intersticiais entre partidas). O AdMob pode coletar e utilizar dados conforme a sua própria política de privacidade para exibir anúncios adequados ou não-personalizados.<br>
+            Consulte: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Como o Google utiliza informações de sites ou apps</a> e a <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidade da Google</a>.</li>
+            <li><strong>Google Play In-App Billing (Google LLC):</strong> Utilizado para processamento seguro de compras dentro do app (como a compra única do Passe VIP para remover anúncios). Os dados financeiros e de cartões de crédito são processados e protegidos diretamente pela Google Play Store; nós não temos acesso aos seus dados de pagamento.</li>
+        </ul>
+
+        <h2>3. Remoção de Anúncios (Passe VIP)</h2>
+        <p>Oferecemos a opção de compra do <strong>Passe VIP / Remover Anúncios</strong>. Ao realizar essa compra opcional, a exibição de anúncios é desativada permanentemente no seu dispositivo, cessando as chamadas a redes de anúncios do AdMob dentro do jogo.</p>
+
+        <h2>4. Privacidade de Crianças (COPPA e LGPD)</h2>
+        <p>O Aplicativo é um jogo de palavras e vocabulário voltado para todas as idades. Não coletamos intencionalmente nenhuma informação de identificação pessoal de crianças menores de 13 anos (ou da idade limite legal aplicável em sua jurisdição). Se você é pai, mãe ou responsável e acredita que seu filho nos forneceu informações pessoais, entre em contato conosco para que possamos tomar as medidas necessárias.</p>
+
+        <h2>5. Armazenamento e Segurança dos Dados</h2>
+        <p>Adotamos práticas adequadas de desenvolvimento para garantir a segurança dos dados armazenados no dispositivo. Como não operamos servidores remotos com bancos de dados de contas de usuários, não há risco de vazamento de credenciais pessoais através do jogo.</p>
+
+        <h2>6. Seus Direitos (LGPD e GDPR)</h2>
+        <p>Em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018) e o Regulamento Geral sobre a Proteção de Dados (GDPR):</p>
+        <ul>
+            <li>Você pode redefinir o seu identificador de publicidade a qualquer momento nas configurações do seu dispositivo Android (Configurações &gt; Google &gt; Anúncios &gt; Redefinir ID de publicidade).</li>
+            <li>Você pode apagar todo o seu histórico de jogo desinstalando o Aplicativo ou limpando o armazenamento do jogo em (Configurações &gt; Aplicativos &gt; Jogo da Forca &gt; Limpar Armazenamento).</li>
+        </ul>
+
+        <h2>7. Alterações a Esta Política</h2>
+        <p>Podemos atualizar nossa Política de Privacidade periodicamente para refletir mudanças regulatórias ou aprimoramentos técnicos no Aplicativo. Recomendamos revisar esta página periodicamente. As alterações entram em vigor imediatamente após a sua publicação nesta página.</p>
+
+        <h2>8. Contato e Suporte</h2>
+        <p>Se você tiver alguma dúvida, sugestão ou solicitação referente a esta Política de Privacidade ou ao funcionamento do jogo, entre em contato conosco:</p>
+        <ul>
+            <li><strong>E-mail de Suporte:</strong> <a href="mailto:contato@sigs.com.br">contato@sigs.com.br</a></li>
+            <li><strong>Desenvolvedor:</strong> Sigs Apps</li>
+            <li><strong>Identificador do App:</strong> <code>br.com.sigs.forca</code></li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Jogo da Forca Multilíngue. Todos os direitos reservados.</p>
+    </footer>
+</div>
+
+</body>
+</html>
