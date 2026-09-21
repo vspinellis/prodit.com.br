@@ -4,17 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Avaliações do Produto | Prodit</title>
-    <meta name="description" id="page-desc" content="Veja as opiniões sinceras, notas e o veredito da comunidade sobre este produto no Prodit.">
+    <meta name="description" id="page-desc" content="Veja as opiniões sinceras, notas, GTIN e o veredito da comunidade sobre este produto no Prodit.">
+    <meta name="keywords" id="page-keywords" content="avaliação de produtos, opinioes reais, codigo de barras, gtin, prodit, estou fora">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" id="canonical-url" href="https://prodit.com.br/avaliacao-produtos/produto.html">
 
     <!-- Open Graph / WhatsApp / Facebook -->
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="product">
     <meta property="og:title" id="og-title" content="Avaliações do Produto no Prodit">
-    <meta property="og:description" id="og-desc" content="Veja a média de estrelas e o que as pessoas realmente acharam antes de comprar.">
-    <meta property="og:site_name" content="Prodit">
+    <meta property="og:description" id="og-desc" content="Veja a média de estrelas, GTIN e quantas pessoas marcaram Estou Fora antes de comprar.">
+    <meta property="og:url" id="og-url" content="https://prodit.com.br/avaliacao-produtos/produto.html">
+    <meta property="og:site_name" content="Prodit - Avaliação de Produtos">
     <meta property="og:image" content="https://prodit.com.br/assets/prodit_full.png">
+    <meta property="og:locale" content="pt_BR">
 
-    <link rel="icon" type="image/png" href="../assets/favicon.png">
-    <link rel="apple-touch-icon" href="../assets/app_icon.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="tw-title" content="Avaliações do Produto no Prodit">
+    <meta name="twitter:description" id="tw-desc" content="Veja a média de estrelas, GTIN e opiniões reais antes de comprar.">
+    <meta name="twitter:image" content="https://prodit.com.br/assets/prodit_full.png">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png?v=3">
+    <link rel="shortcut icon" href="/favicon.ico?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/app_icon.png?v=3">
+
+    <!-- Schema.org Structured Data (Rich Snippets / Google SEO) -->
+    <script type="application/ld+json" id="schema-product"></script>
+    <script type="application/ld+json" id="schema-breadcrumb"></script>
+    <script type="application/ld+json" id="schema-faq"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -356,9 +375,26 @@
             <!-- Product Overview Column -->
             <div class="col-lg-5">
                 <div class="product-card sticky-lg-top" style="top: 80px;">
-                    <span class="product-badge"><i class="fas fa-barcode me-1"></i> GTIN VERIFICADO</span>
+                    <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
+                        <span class="product-badge mb-0"><i class="fas fa-barcode me-1"></i> GTIN VERIFICADO</span>
+                        <div class="d-flex align-items-center gap-1">
+                            <span class="badge bg-light text-secondary border font-monospace" id="prod-gtin-badge">GTIN: --</span>
+                            <button class="btn btn-sm btn-outline-secondary py-0 px-2" style="font-size: 0.75rem; border-radius: 6px;" onclick="copyGtin()" title="Copiar código de barras">
+                                <i class="far fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
                     <h1 class="product-title" id="prod-name">--</h1>
                     <div class="product-gtin" id="prod-gtin">Código de Barras: --</div>
+
+                    <!-- Termômetro da Comunidade: "Estou Fora" -->
+                    <div id="card-estou-fora" class="p-3 rounded-3 mb-3 border bg-light">
+                        <div class="d-flex align-items-center gap-2 text-muted small">
+                            <i class="fas fa-spinner fa-spin text-primary"></i>
+                            <span>Calculando dados da comunidade...</span>
+                        </div>
+                    </div>
 
                     <div class="rating-box mb-4">
                         <div class="d-flex align-items-center justify-content-between mb-3">
@@ -412,6 +448,54 @@
                     </a>
                 </div>
 
+                <!-- FAQ Section for SEO & Search Engines -->
+                <div class="faq-section mt-5 pt-3">
+                    <h4 class="fw-bold text-dark mb-3 d-flex align-items-center gap-2">
+                        <i class="fas fa-question-circle text-primary"></i>
+                        <span>Perguntas Frequentes sobre <span id="faq-prod-title">este produto</span></span>
+                    </h4>
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item rounded-3 mb-2 border shadow-none">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold collapsed rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Este produto vale a pena comprar?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary" id="faq1-text">
+                                    Consulte a nota e os vereditos sinceros da comunidade Prodit.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item rounded-3 mb-2 border shadow-none">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold collapsed rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Quantas pessoas marcaram que "Estão Fora" (não compram mais)?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary" id="faq2-text">
+                                    Veja o termômetro de rejeição do produto calculado a partir de avaliações verificadas.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item rounded-3 mb-2 border shadow-none">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold collapsed rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Qual é o código de barras (GTIN/EAN) oficial deste produto?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary" id="faq3-text">
+                                    O código GTIN permite buscar e escanear instantaneamente no aplicativo Prodit.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Bottom Download Banner in Feed -->
                 <div class="card border-0 text-white rounded-4 overflow-hidden mt-4 p-4 text-center" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);">
                     <h4 class="fw-bold mb-2">Gostou das opiniões sinceras?</h4>
@@ -444,6 +528,7 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     const API_BASE = 'https://sps.sigs.com.br/prodit';
     const PLAYSTORE_URL = 'https://play.google.com/store/apps/details?id=br.com.prodit';
@@ -505,6 +590,14 @@
         }
     }
 
+    function copyGtin() {
+        const gtinText = document.getElementById('prod-gtin-val') ? document.getElementById('prod-gtin-val').innerText.replace('GTIN: ', '').trim() : '';
+        if (gtinText && gtinText !== '--' && gtinText !== 'Não informado') {
+            navigator.clipboard.writeText(gtinText);
+            alert('Código GTIN copiado: ' + gtinText);
+        }
+    }
+
     async function loadProductData() {
         if (!productId) {
             document.getElementById('loading-state').classList.add('d-none');
@@ -524,19 +617,77 @@
                 return;
             }
 
-            // Inserir dados do produto
-            document.getElementById('prod-name').innerText = resProd.nome || 'Produto';
-            document.getElementById('prod-gtin').innerText = `Código de Barras: ${resProd.gtin || 'Não informado'}`;
-            document.getElementById('page-title').innerText = `${resProd.nome} - Avaliações | Prodit`;
-            document.getElementById('og-title').setAttribute('content', `${resProd.nome} no Prodit`);
+            const nome = resProd.nome || 'Produto';
+            const gtin = resProd.gtin || '';
+            const media = Number(resProd.agregados?.media || 0);
+            const total = Number(resProd.agregados?.total || 0);
+            const estouFora = Number(resProd.agregados?.estou_fora || 0);
+            const pctFora = Number(resProd.agregados?.percentual_estou_fora || 0);
+            const reviews = resReviews?.data || [];
 
-            const media = resProd.agregados?.media || 0;
-            const total = resProd.agregados?.total || 0;
+            // 1. Inserir dados visuais do produto
+            document.getElementById('prod-name').innerText = nome;
+            document.getElementById('prod-gtin').innerText = `Código de Barras Oficial: ${gtin || 'Não informado'}`;
+            if (document.getElementById('prod-gtin-badge')) {
+                document.getElementById('prod-gtin-badge').innerText = gtin ? `GTIN: ${gtin}` : 'GTIN: Não informado';
+            }
+            if (document.getElementById('faq-prod-title')) {
+                document.getElementById('faq-prod-title').innerText = nome;
+            }
+
             document.getElementById('prod-media').innerText = media > 0 ? media.toFixed(1) : '0.0';
             document.getElementById('prod-total').innerText = total;
             document.getElementById('prod-stars').innerHTML = renderStars(media);
 
-            // Distribution bars
+            // 2. Termômetro da Comunidade: "Estou Fora"
+            const cardEstouFora = document.getElementById('card-estou-fora');
+            if (cardEstouFora) {
+                if (estouFora > 0) {
+                    cardEstouFora.className = 'p-3 rounded-3 mb-3 border border-danger-subtle bg-danger-subtle';
+                    cardEstouFora.innerHTML = `
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; min-width: 44px; font-size: 1.2rem;">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold text-danger" style="font-size: 0.95rem;">
+                                    ${estouFora} pessoa(s) marcaram "Estou Fora"
+                                </div>
+                                <div class="small text-danger-emphasis" style="font-size: 0.82rem; line-height: 1.3;">
+                                    <strong>${pctFora}%</strong> dos avaliadores adicionaram este item à lista de <strong>"Nunca Mais Compro"</strong>.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (total > 0) {
+                    cardEstouFora.className = 'p-3 rounded-3 mb-3 border border-success-subtle bg-success-subtle';
+                    cardEstouFora.innerHTML = `
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; min-width: 44px; font-size: 1.2rem;">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold text-success" style="font-size: 0.95rem;">
+                                    Nenhum "Estou Fora" registrado!
+                                </div>
+                                <div class="small text-success-emphasis" style="font-size: 0.82rem; line-height: 1.3;">
+                                    <strong>100% de aceitação</strong> entre quem avaliou este produto no app Prodit.
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    cardEstouFora.className = 'p-3 rounded-3 mb-3 border bg-light';
+                    cardEstouFora.innerHTML = `
+                        <div class="d-flex align-items-center gap-2 text-muted small">
+                            <i class="fas fa-info-circle text-primary"></i>
+                            <span>Seja o primeiro a avaliar e dizer se você recomenda ou se <strong>"Está Fora"</strong>!</span>
+                        </div>
+                    `;
+                }
+            }
+
+            // 3. Distribution bars
             const dist = resProd.agregados?.distribuicao || {};
             const colors = ['#EF4444', '#F97316', '#F59E0B', '#84CC16', '#22C55E'];
             let breakdownHtml = '';
@@ -555,10 +706,8 @@
             }
             document.getElementById('rating-breakdown').innerHTML = breakdownHtml;
 
-            // Inserir reviews
-            const reviews = resReviews?.data || [];
+            // 4. Inserir reviews
             document.getElementById('reviews-count-badge').innerText = reviews.length;
-
             const reviewsListEl = document.getElementById('reviews-list');
             if (reviews.length === 0) {
                 document.getElementById('empty-reviews').classList.remove('d-none');
@@ -588,7 +737,7 @@
 
                             ${rev.listaNegra || rev.lista_negra ? `
                                 <div class="mb-2">
-                                    <span class="blacklist-badge"><i class="fas fa-ban"></i> NUNCA MAIS COMPRO</span>
+                                    <span class="blacklist-badge"><i class="fas fa-ban me-1"></i> Marcou: Estou Fora! (Nunca Mais Compro)</span>
                                 </div>
                             ` : ''}
 
@@ -603,6 +752,146 @@
                     `;
                 }).join('');
             }
+
+            // 5. Preencher Perguntas Frequentes (FAQ) para Usuários e SEO
+            const faq1El = document.getElementById('faq1-text');
+            const faq2El = document.getElementById('faq2-text');
+            const faq3El = document.getElementById('faq3-text');
+
+            if (faq1El) {
+                faq1El.innerHTML = `Com base em <strong>${total} avaliação(ões)</strong> de consumidores reais no aplicativo Prodit, <strong>${nome}</strong> possui nota média de <strong>${media > 0 ? media.toFixed(1) : '0.0'} de 5.0 estrelas</strong>. ${media >= 4 ? 'A grande maioria da comunidade recomenda a compra e aprova a qualidade.' : media >= 3 ? 'A opinião dos consumidores é moderada / equilibrada.' : 'O produto possui avaliações críticas relevantes na plataforma.'}`;
+            }
+            if (faq2El) {
+                faq2El.innerHTML = estouFora > 0
+                    ? `Até o momento, <strong>${estouFora} pessoa(s) (${pctFora}% dos avaliadores)</strong> marcaram o selo <em>"Estou Fora"</em> no app Prodit, indicando que se arrependeram ou não compram mais este item.`
+                    : `<strong>Nenhum consumidor marcou "Estou Fora"</strong> para este produto até o momento, alcançando 100% de aceitação na comunidade Prodit.`;
+            }
+            if (faq3El) {
+                faq3El.innerHTML = `O código de barras oficial cadastrado é <code>${gtin || 'Não informado'}</code>. No <strong>App Prodit</strong>, você pode usar o leitor de código de barras pela câmera do smartphone para consultar e registrar avaliações instantaneamente nos supermercados.`;
+            }
+
+            // 6. OTIMIZAÇÃO SEO DINÂMICA (Meta Tags & OpenGraph)
+            const currentUrl = window.location.href;
+            const pageTitle = `${nome} - Avaliações, Nota e GTIN ${gtin} | Prodit`;
+            const pageDesc = `Confira opiniões reais sobre ${nome} (GTIN: ${gtin}). Nota média: ${media.toFixed(1)}/5 (${total} opiniões). ${estouFora > 0 ? `${estouFora} marcaram "Estou Fora".` : '100% de aprovação.'} Veja antes de comprar!`;
+            const pageKeywords = `${nome}, GTIN ${gtin}, avaliacao ${nome}, opinioes ${nome}, ${nome} vale a pena, estou fora ${nome}, codigo de barras ${gtin}, prodit app`;
+
+            document.title = pageTitle;
+            if (document.getElementById('page-title')) document.getElementById('page-title').innerText = pageTitle;
+            if (document.getElementById('page-desc')) document.getElementById('page-desc').setAttribute('content', pageDesc);
+            if (document.getElementById('page-keywords')) document.getElementById('page-keywords').setAttribute('content', pageKeywords);
+            if (document.getElementById('canonical-url')) document.getElementById('canonical-url').setAttribute('href', currentUrl);
+
+            if (document.getElementById('og-title')) document.getElementById('og-title').setAttribute('content', pageTitle);
+            if (document.getElementById('og-desc')) document.getElementById('og-desc').setAttribute('content', pageDesc);
+            if (document.getElementById('og-url')) document.getElementById('og-url').setAttribute('content', currentUrl);
+
+            if (document.getElementById('tw-title')) document.getElementById('tw-title').setAttribute('content', pageTitle);
+            if (document.getElementById('tw-desc')) document.getElementById('tw-desc').setAttribute('content', pageDesc);
+
+            // 7. INJEÇÃO DE SCHEMA.ORG (JSON-LD) PARA O GOOGLE
+            const productSchema = {
+                "@context": "https://schema.org/",
+                "@type": "Product",
+                "name": nome,
+                "image": "https://prodit.com.br/assets/prodit_full.png",
+                "description": pageDesc,
+                ...(gtin ? { "gtin13": gtin, "sku": gtin } : {}),
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Prodit"
+                },
+                ...(total > 0 ? {
+                    "aggregateRating": {
+                        "@type": "AggregateRating",
+                        "ratingValue": media.toFixed(1),
+                        "reviewCount": total.toString(),
+                        "bestRating": "5",
+                        "worstRating": "1"
+                    }
+                } : {}),
+                ...(reviews.length > 0 ? {
+                    "review": reviews.slice(0, 10).map(r => ({
+                        "@type": "Review",
+                        "author": {
+                            "@type": "Person",
+                            "name": r.usuario?.nome || "Consumidor Prodit"
+                        },
+                        "datePublished": r.criadoEm || r.criado_em ? new Date(r.criadoEm || r.criado_em).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+                        "reviewBody": r.texto || r.titulo || "Avaliação verificada no Prodit",
+                        "reviewRating": {
+                            "@type": "Rating",
+                            "ratingValue": r.nota.toString(),
+                            "bestRating": "5",
+                            "worstRating": "1"
+                        }
+                    }))
+                } : {})
+            };
+            const schemaProductEl = document.getElementById('schema-product');
+            if (schemaProductEl) schemaProductEl.textContent = JSON.stringify(productSchema);
+
+            const breadcrumbSchema = {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Portal Prodit",
+                        "item": "https://prodit.com.br"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Avaliação de Produtos",
+                        "item": "https://prodit.com.br/avaliacao-produtos/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": nome,
+                        "item": currentUrl
+                    }
+                ]
+            };
+            const schemaBreadcrumbEl = document.getElementById('schema-breadcrumb');
+            if (schemaBreadcrumbEl) schemaBreadcrumbEl.textContent = JSON.stringify(breadcrumbSchema);
+
+            const faqSchema = {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": `O produto ${nome} é bom? Vale a pena comprar?`,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": `Segundo as avaliações no app Prodit, ${nome} tem nota média de ${media.toFixed(1)} de 5 estrelas, baseada em ${total} opiniões de consumidores.`
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": `Quantas pessoas marcaram que 'Estão Fora' de ${nome}?`,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": estouFora > 0
+                                ? `${estouFora} pessoa(s) (${pctFora}%) marcaram que estão fora / não compram mais este produto.`
+                                : `Nenhum consumidor marcou 'Estou Fora' para este produto, registrando 100% de aceitação.`
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": `Qual o código de barras (GTIN/EAN) de ${nome}?`,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": `O código GTIN cadastrado e verificado para ${nome} é ${gtin || 'código não informado'}.`
+                        }
+                    }
+                ]
+            };
+            const schemaFaqEl = document.getElementById('schema-faq');
+            if (schemaFaqEl) schemaFaqEl.textContent = JSON.stringify(faqSchema);
 
             document.getElementById('loading-state').classList.add('d-none');
             document.getElementById('product-content').classList.remove('d-none');
