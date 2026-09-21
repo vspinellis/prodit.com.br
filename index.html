@@ -3,525 +3,540 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prodit - Escolha com confiança</title>
-    <meta name="description" content="Prodit: Escaneie, descubra e avalie. O app definitivo para saber a verdade sobre os produtos antes de comprar.">
+    <title>Prodit | Tecnologia, Inteligência de Consumo e Transparência</title>
+    <meta name="description" content="A Prodit desenvolve tecnologia e inteligência para empoderar o consumidor moderno. Conheça nosso ecossistema de soluções, incluindo o app Prodit Avaliação de Produtos.">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟧</text></svg>">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- 1. Variáveis e Base --- */
         :root {
             --primary: #FF5722;
-            --primary-dark: #E64A19;
+            --primary-glow: rgba(255, 87, 34, 0.4);
             --primary-gradient: linear-gradient(135deg, #FF5722 0%, #FF8A50 100%);
-            --text-dark: #1F2937;
-            --text-light: #6B7280;
-            --bg-light: #F9FAFB;
-            --white: #FFFFFF;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --border-radius: 24px;
+            --dark-bg: #07090E;
+            --dark-surface: #0E131F;
+            --dark-surface-hover: #141B2D;
+            --dark-border: rgba(255, 255, 255, 0.08);
+            --text-main: #F8FAFC;
+            --text-dim: #94A3B8;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
             overflow-x: hidden;
-            background-color: var(--white);
+            letter-spacing: -0.2px;
         }
 
-        h1, h2, h3, h4, .btn-playstore {
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: -0.5px;
+        /* Ambient Glow Backgrounds */
+        .glow-sphere-1 {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 450px;
+            background: radial-gradient(ellipse, rgba(255, 87, 34, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(50px);
         }
 
-        /* --- 2. Navbar --- */
+        /* Navbar */
         .navbar {
-            padding: 1.5rem 0;
-            transition: all 0.3s ease;
+            padding: 18px 0;
+            background: rgba(7, 9, 14, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--dark-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .navbar-brand img {
-            height: 45px;
-            border-radius: 8px;
+            height: 42px;
+        }
+        .nav-link {
+            color: var(--text-dim) !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: var(--text-main) !important;
         }
 
-        /* --- 3. Hero Section --- */
+        /* Hero */
         .hero {
             position: relative;
-            background: var(--primary-gradient);
-            padding-top: 130px;
-            padding-bottom: 180px;
-            color: var(--white);
-            overflow: hidden;
+            padding: 120px 0 100px;
+            z-index: 1;
         }
 
-        /* Efeito de luz no fundo */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            filter: blur(80px);
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero .lead {
-            font-size: 1.25rem;
-            font-weight: 400;
-            opacity: 0.95;
-            max-width: 90%;
-        }
-
-        /* Mockup Flutuante */
-        .mockup-container {
-            position: relative;
-            z-index: 2;
-        }
-
-        .app-mockup {
-            max-width: 320px;
-            border-radius: 35px;
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.4);
-            animation: float 6s ease-in-out infinite;
-            border: 8px solid #000;
-            background-color: #fff;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Onda SVG */
-        .custom-shape-divider-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-            transform: rotate(180deg);
-        }
-        .custom-shape-divider-bottom svg {
-            position: relative;
-            display: block;
-            width: calc(144% + 1.3px);
-            height: 120px;
-        }
-        .custom-shape-divider-bottom .shape-fill {
-            fill: #FFFFFF;
-        }
-
-        /* --- 4. Botão Play Store --- */
-        .btn-playstore {
+        .hero-pill {
             display: inline-flex;
             align-items: center;
-            background-color: #0f0f0f;
-            color: #fff;
-            border-radius: 14px;
-            padding: 12px 28px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Brilho ao passar o mouse */
-        .btn-playstore::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: 0.5s;
-        }
-        .btn-playstore:hover::after {
-            left: 100%;
-        }
-
-        .btn-playstore:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-            color: #fff;
-            background-color: #000;
-        }
-        .btn-playstore i {
-            font-size: 2rem;
-            margin-right: 15px;
-            color: #00d386;
-        }
-        .btn-text small {
-            display: block;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            opacity: 0.8;
-        }
-        .btn-text strong {
-            font-size: 1.3rem;
-            line-height: 1;
-        }
-
-        /* --- 5. Recursos (Cards) --- */
-        .features-section {
-            padding: 80px 0;
-        }
-        .section-title {
-            color: var(--text-dark);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 4px;
-            background: var(--primary);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        .feature-card {
-            background: var(--white);
-            padding: 45px 35px;
-            border-radius: var(--border-radius);
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid #f0f0f0;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Detalhe na borda inferior */
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: var(--primary);
-            transition: width 0.4s ease;
-        }
-        .feature-card:hover::before {
-            width: 100%;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-            border-color: transparent;
-        }
-
-        .icon-box {
-            width: 70px;
-            height: 70px;
+            gap: 10px;
             background: rgba(255, 87, 34, 0.1);
+            border: 1px solid rgba(255, 87, 34, 0.25);
+            color: #FF8A50;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 8px 18px;
+            border-radius: 30px;
+            margin-bottom: 25px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .hero-title span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-lead {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            max-width: 780px;
+            margin: 0 auto 35px;
+        }
+
+        /* Buttons */
+        .btn-brand-primary {
+            background: var(--primary-gradient);
+            color: #FFFFFF !important;
+            font-weight: 700;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px -5px var(--primary-glow);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-brand-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px -5px var(--primary-glow);
+            filter: brightness(1.08);
+        }
+
+        .btn-brand-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #FFFFFF !important;
+            font-weight: 700;
+            border: 1px solid var(--dark-border);
+            padding: 14px 30px;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-brand-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Section Headings */
+        .section-tag {
             color: var(--primary);
-            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .section-heading {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        /* Product Cards / Ecosystem */
+        .ecosystem-card {
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .ecosystem-card:hover {
+            background: var(--dark-surface-hover);
+            border-color: rgba(255, 87, 34, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-active-glow {
+            border: 1px solid rgba(255, 87, 34, 0.35);
+            background: linear-gradient(180deg, rgba(255, 87, 34, 0.05) 0%, var(--dark-surface) 100%);
+        }
+
+        .product-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
-            margin: 0 auto 25px;
-            transition: all 0.3s ease;
+            margin-bottom: 25px;
         }
-        .feature-card:hover .icon-box {
-            background: var(--primary);
-            color: white;
-            transform: rotate(10deg);
+        .icon-active {
+            background: var(--primary-gradient);
+            color: #FFFFFF;
+            box-shadow: 0 10px 20px -5px var(--primary-glow);
         }
-
-        .feature-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        .feature-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
+        .icon-future {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-dim);
+            border: 1px solid var(--dark-border);
         }
 
-        /* --- 6. Passo a Passo --- */
-        .steps-section {
-            background-color: var(--bg-light);
-            padding: 100px 0;
+        .badge-live {
+            background: #10B981;
+            color: #FFFFFF;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        /* Wrapper para linha do tempo */
-        .steps-wrapper {
+        .badge-soon {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Download App Feature Box */
+        .app-highlight-box {
+            background: linear-gradient(135deg, #131B2E 0%, #0A0F1D 100%);
+            border: 1px solid rgba(255, 87, 34, 0.25);
+            border-radius: 32px;
+            padding: 60px 50px;
             position: relative;
+            overflow: hidden;
         }
-        .steps-wrapper::before {
+        .app-highlight-box::before {
             content: '';
             position: absolute;
-            top: 20px;
-            bottom: 50px;
-            left: 23px; /* Centralizado com os números */
-            width: 2px;
-            border-left: 2px dashed #cbd5e1;
-            z-index: 0;
-        }
-
-        .step-item {
-            position: relative;
-            z-index: 1;
-            margin-bottom: 2rem;
-        }
-
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: var(--white);
-            border: 2px solid var(--primary);
-            color: var(--primary);
+            top: -100px;
+            right: -100px;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
             border-radius: 50%;
-            display: flex;
+            pointer-events: none;
+        }
+
+        /* Play Store Button */
+        .btn-playstore-black {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 800;
-            position: absolute;
-            left: 0;
-            top: 0;
-            box-shadow: 0 0 0 5px var(--bg-light);
+            background: #000000;
+            color: #FFFFFF !important;
+            border-radius: 14px;
+            padding: 12px 26px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .btn-playstore-black:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(255, 87, 34, 0.2);
+        }
+        .btn-playstore-black i {
+            font-size: 2rem;
+            margin-right: 14px;
+            color: #00E676;
+        }
+        .btn-playstore-black .btn-text small {
+            display: block;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.75;
+        }
+        .btn-playstore-black .btn-text strong {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.1;
         }
 
-        .step-content {
-            padding-left: 70px;
-            padding-top: 5px;
-        }
-
-        /* --- 7. Footer --- */
+        /* Footer */
         footer {
-            background: #111;
-            color: #aaa;
-            padding: 60px 0 30px;
+            background: #040508;
+            border-top: 1px solid var(--dark-border);
+            padding: 70px 0 40px;
+            color: var(--text-dim);
         }
         footer a {
-            color: #fff;
+            color: var(--text-dim);
             text-decoration: none;
-            transition: 0.2s;
+            transition: color 0.2s;
         }
         footer a:hover {
             color: var(--primary);
         }
 
         @media (max-width: 991px) {
-            .hero {
-                text-align: center;
-                padding-top: 60px;
-                padding-bottom: 150px;
-            }
-            .hero h1 { font-size: 2.5rem; }
-            .mockup-container { margin-top: 50px; }
-            .app-mockup { max-width: 260px; }
-            .steps-wrapper::before { display: none; }
+            .hero-title { font-size: 2.8rem; }
+            .hero-lead { font-size: 1.1rem; }
+            .app-highlight-box { padding: 40px 25px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark absolute-top" style="position: absolute; width: 100%; z-index: 10;">
+<div class="glow-sphere-1"></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
     <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="./">
+            <img src="assets/prodit_logo.svg" alt="Prodit" style="height: 44px;">
+        </a>
 
-        <img src="assets/prodit_full.png" alt="Logo do App Prodit" style="width: 120px">
-
-        <div class="d-none d-lg-block">
-            <a href="https://play.google.com/store/apps/details?id=br.com.prodit" target="_blank" class="btn btn-light rounded-pill fw-bold px-4 shadow-sm" style="color: var(--primary)">
-                Baixar App
+        <div class="ms-auto d-flex align-items-center gap-3">
+            <a href="avaliacao-produtos/" class="btn btn-outline-light rounded-pill btn-sm px-3 fw-bold d-none d-sm-inline-flex">
+                <i class="fas fa-barcode me-2 text-warning"></i>Avaliação de Produtos
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=br.com.prodit" target="_blank" class="btn btn-brand-primary btn-sm rounded-pill px-4">
+                <i class="fab fa-google-play me-1"></i>Baixar App
             </a>
         </div>
     </div>
 </nav>
 
-<header class="hero d-flex align-items-center">
+<!-- Hero Section -->
+<header class="hero text-center">
     <div class="container">
-        <div class="row align-items-center">
-
-            <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
-                <span class="badge bg-light text-primary px-3 py-2 rounded-pill mb-3 fw-bold shadow-sm">
-                    <i class="fas fa-star me-1"></i> O app #1 de avaliações
-                </span>
-                <h1>Não compre no escuro. <br>Escaneie. Descubra.</h1>
-                <p class="lead mb-5">
-                    O <strong>Prodit</strong> revela a verdade sobre os produtos na prateleira.
-                    Veja opiniões reais de quem já usou antes de passar no caixa.
-                </p>
-
-                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-lg-start justify-content-center">
-                    <a href="https://play.google.com/store/apps/details?id=br.com.prodit" class="btn-playstore" target="_blank">
-                        <i class="fab fa-google-play"></i>
-                        <div class="btn-text">
-                            <small>Disponível no</small>
-                            <strong>Google Play</strong>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="mt-4 text-white-50 small">
-                    <i class="fas fa-shield-alt me-1 text-white"></i> Opiniões 100% imparciais
-                    <span class="mx-2">•</span>
-                    <i class="fas fa-bolt me-1 text-white"></i> Escaneamento instantâneo
-                </div>
+        <div data-aos="fade-up">
+            <div class="hero-pill">
+                <i class="fas fa-cubes"></i> Apps & Jogos Prodit
             </div>
+            <h1 class="hero-title">
+                Tecnologia, utilidade<br>
+                <span>e entretenimento inteligente.</span>
+            </h1>
+            <p class="hero-lead">
+                Desenvolvemos aplicativos que facilitam o seu dia a dia e jogos clássicos que estimulam sua mente. Conheça nossos produtos disponíveis no Google Play.
+            </p>
 
-            <div class="col-lg-6 text-center mockup-container" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
-                <img src="assets/login.png" alt="Interface do App Prodit" class="app-mockup img-fluid">
+            <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mb-5">
+                <a href="#produtos" class="btn-brand-primary">
+                    <i class="fas fa-th-large"></i> Ver Nossos Aplicativos
+                </a>
+                <a href="avaliacao-produtos/" class="btn-brand-secondary">
+                    <i class="fas fa-barcode text-warning"></i> Prodit - Avaliação de Produtos
+                </a>
             </div>
         </div>
-    </div>
-
-    <div class="custom-shape-divider-bottom">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-        </svg>
     </div>
 </header>
 
-<section class="features-section">
-    <div class="container">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="section-title">Por que usar o Prodit?</h2>
-            <p class="text-muted mt-2">Transformamos a forma como você interage com produtos no mercado.</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="feature-card">
-                    <div class="icon-box">
-                        <i class="fas fa-barcode"></i>
-                    </div>
-                    <h3>Escaneie na Hora</h3>
-                    <p>Viu algo interessante na prateleira? Aponte a câmera para o código de barras e acesse a ficha técnica instantaneamente.</p>
-                </div>
-            </div>
-
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-card">
-                    <div class="icon-box">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>Sem Fake News</h3>
-                    <p>Chega de marketing exagerado. Leia avaliações honestas de pessoas reais que compraram e testaram o produto.</p>
-                </div>
-            </div>
-
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="feature-card">
-                    <div class="icon-box">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3>Crie sua Lista</h3>
-                    <p>Salve seus produtos favoritos, crie listas de desejo ou marque aqueles que você nunca mais quer comprar.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="steps-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
-                <h2 class="fw-bold mb-4">É tão simples quanto parece.</h2>
-
-                <div class="steps-wrapper">
-
-                    <div class="step-item d-flex">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4 class="fw-bold">Instale em segundos</h4>
-                            <p class="text-muted">Disponível agora na Google Play Store.</p>
-                        </div>
-                    </div>
-
-                    <div class="step-item d-flex">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4 class="fw-bold">Escaneie</h4>
-                            <p class="text-muted">Use a câmera no código de barras do produto.</p>
-                        </div>
-                    </div>
-
-                    <div class="step-item d-flex">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4 class="fw-bold">Decida</h4>
-                            <p class="text-muted">Leia as reviews e leve apenas o que vale a pena.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-lg-7" data-aos="fade-left">
-                <div class="bg-white p-5 rounded-4 shadow-lg text-center">
-                    <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
-                    <h3 class="mt-4 fw-bold">Compra Aprovada!</h3>
-                    <p class="text-muted">Junte-se a milhares de usuários fazendo escolhas inteligentes.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="text-center py-5 bg-white">
+<!-- Produtos Section -->
+<section id="produtos" class="py-5" style="position: relative; z-index: 2;">
     <div class="container py-4">
-        <div class="card border-0 bg-dark text-white rounded-4 overflow-hidden shadow-lg" data-aos="zoom-in">
-            <div class="card-body p-5 position-relative">
-                <div style="position:absolute; top:-50px; left:-50px; width:150px; height:150px; background:var(--primary); border-radius:50%; opacity:0.3; filter: blur(30px);"></div>
+        <div class="text-center max-w-700 mx-auto mb-5" data-aos="fade-up">
+            <span class="section-tag">Nossos Aplicativos & Jogos</span>
+            <h2 class="section-heading">Criados para o seu smartphone</h2>
+            <p class="text-secondary fs-5">Soluções reais que você pode baixar e usar agora mesmo.</p>
+        </div>
 
-                <div style="position: relative; z-index: 1;">
-                    <h2 class="fw-bold mb-3">Pronto para economizar dinheiro e evitar ciladas?</h2>
-                    <p class="lead mb-4 text-white-50">Baixe o Prodit agora mesmo.</p>
-
-                    <a href="https://play.google.com/store/apps/details?id=br.com.prodit" class="btn-playstore" target="_blank">
-                        <i class="fab fa-google-play"></i>
-                        <div class="btn-text">
-                            <small>Baixe agora no</small>
-                            <strong>Google Play</strong>
+        <div class="row g-4 justify-content-center">
+            <!-- Card 1: Prodit - Avaliação de Produtos (Destaque) -->
+            <div class="col-12" data-aos="fade-up" data-aos-delay="100">
+                <div class="ecosystem-card card-active-glow">
+                    <div class="row align-items-center g-4">
+                        <div class="col-lg-7">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="product-icon icon-active mb-0">
+                                    <i class="fas fa-barcode"></i>
+                                </div>
+                                <div>
+                                    <span class="badge-live mb-1"><i class="fas fa-check-circle me-1"></i> Disponível no Android</span>
+                                    <h3 class="fw-bold fs-3 mb-0 text-white">Prodit - Avaliação de Produtos</h3>
+                                </div>
+                            </div>
+                            <p class="text-secondary mb-4" style="line-height: 1.6; font-size: 1.05rem;">
+                                O aplicativo que revela a verdade sobre qualquer produto na prateleira. Aponte a câmera para o código de barras e descubra na hora a nota média, relatos sinceros de quem já comprou e a lista negra da galera antes de passar no caixa.
+                            </p>
+                            <div class="d-flex flex-wrap gap-3">
+                                <a href="avaliacao-produtos/" class="btn btn-outline-warning rounded-pill fw-bold px-4 py-2">
+                                    Conhecer o Produto <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                                <a href="https://play.google.com/store/apps/details?id=br.com.prodit" target="_blank" class="btn btn-dark rounded-pill fw-bold px-4 py-2 border border-secondary text-white">
+                                    <i class="fab fa-google-play me-1 text-success"></i> Baixar no Google Play
+                                </a>
+                            </div>
                         </div>
-                    </a>
+
+                        <div class="col-lg-5 text-center">
+                            <div class="p-3 rounded-4" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--dark-border);">
+                                <div class="row g-2 text-start">
+                                    <div class="col-12 p-2 rounded-3" style="background: rgba(255,255,255,0.02);">
+                                        <div class="small fw-bold text-white"><i class="fas fa-camera text-warning me-2"></i>Scanner de Código de Barras</div>
+                                        <div class="text-secondary small">Leitura em menos de 1 segundo</div>
+                                    </div>
+                                    <div class="col-12 p-2 rounded-3" style="background: rgba(255,255,255,0.02);">
+                                        <div class="small fw-bold text-white"><i class="fas fa-comments text-warning me-2"></i>Opiniões Sem Filtro</div>
+                                        <div class="text-secondary small">Comentários e notas reais</div>
+                                    </div>
+                                    <div class="col-12 p-2 rounded-3" style="background: rgba(255,255,255,0.02);">
+                                        <div class="small fw-bold text-white"><i class="fas fa-ban text-danger me-2"></i>Lista Negra Comunitária</div>
+                                        <div class="text-secondary small">Marque os itens para nunca mais comprar</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Palavras Cruzadas Diretas -->
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="ecosystem-card">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="product-icon icon-active" style="background: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);">
+                                <i class="fas fa-th"></i>
+                            </div>
+                            <span class="badge-live"><i class="fas fa-gamepad me-1"></i> Jogo Grátis</span>
+                        </div>
+                        <h3 class="fw-bold fs-4 mb-2 text-white">Palavras Cruzadas Diretas</h3>
+                        <p class="text-secondary mb-4" style="line-height: 1.6;">
+                            O clássico passatempo de palavras cruzadas em português para exercitar a mente, enriquecer o vocabulário e relaxar em qualquer lugar. Interface limpa, intuitiva e pensada para você jogar diariamente no celular.
+                        </p>
+                    </div>
+
+                    <div>
+                        <a href="https://play.google.com/store/apps/details?id=br.com.sigs.palavras_cruzadas&hl=pt_BR" target="_blank" class="btn btn-dark w-100 rounded-pill fw-bold py-3 border border-secondary text-white">
+                            <i class="fab fa-google-play me-2 text-success"></i> Baixar Palavras Cruzadas
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Jogo da Forca -->
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="ecosystem-card">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="product-icon icon-active" style="background: linear-gradient(135deg, #10B981 0%, #34D399 100%);">
+                                <i class="fas fa-font"></i>
+                            </div>
+                            <span class="badge-live"><i class="fas fa-gamepad me-1"></i> Jogo Grátis</span>
+                        </div>
+                        <h3 class="fw-bold fs-4 mb-2 text-white">Jogo da Forca Clássico</h3>
+                        <p class="text-secondary mb-4" style="line-height: 1.6;">
+                            O clássico e nostálgico jogo de forca com milhares de palavras, dicas inteligentes e diversas categorias para desafiar seu raciocínio. Diversão garantida para jogar sozinho ou competir com amigos e família.
+                        </p>
+                    </div>
+
+                    <div>
+                        <a href="https://play.google.com/store/apps/details?id=br.com.sigs.forca&hl=pt_BR" target="_blank" class="btn btn-dark w-100 rounded-pill fw-bold py-3 border border-secondary text-white">
+                            <i class="fab fa-google-play me-2 text-success"></i> Baixar Jogo da Forca
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<footer>
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h4 class="fw-bold text-white mb-3">Prodit</h4>
-                <p class="small">Acreditamos que a transparência é a chave para um consumo melhor. Feito com ❤️ para consumidores exigentes.</p>
+<!-- App Highlight & Download Section -->
+<section class="py-5" style="position: relative; z-index: 2;">
+    <div class="container py-4">
+        <div class="app-highlight-box" data-aos="zoom-in">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3">
+                        <i class="fas fa-mobile-alt me-1"></i> Nosso Aplicativo Principal
+                    </span>
+                    <h2 class="display-6 fw-bold text-white mb-3">
+                        Experimente o Prodit Avaliação de Produtos
+                    </h2>
+                    <p class="lead text-white-50 mb-4">
+                        Milhares de produtos já avaliados. Aponte a câmera para o código de barras, leia o que a galera achou e nunca mais leve gato por lebre.
+                    </p>
 
-                <div class="mt-4">
-                    <a href="politica-de-privacidade.html" class="small text-white-50" style="text-decoration: underline;">Política de Privacidade</a>
+                    <div class="d-flex flex-wrap gap-3 align-items-center">
+                        <a href="https://play.google.com/store/apps/details?id=br.com.prodit" class="btn-playstore-black" target="_blank">
+                            <i class="fab fa-google-play"></i>
+                            <div class="btn-text">
+                                <small>Disponível no</small>
+                                <strong>Google Play</strong>
+                            </div>
+                        </a>
+
+                        <a href="avaliacao-produtos/" class="btn btn-outline-light rounded-pill px-4 py-3 fw-bold">
+                            Saiba Mais Sobre o App
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 text-center mt-5 mt-lg-0">
+                    <img src="assets/login.png" alt="Prodit App" class="img-fluid" style="max-height: 380px; border-radius: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); border: 4px solid #1E293B;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row g-4 justify-content-between align-items-center">
+            <div class="col-md-5">
+                <img src="assets/prodit_logo.svg" alt="Prodit" style="height: 38px; margin-bottom: 15px;">
+                <p class="small text-secondary mb-0">
+                    Construindo tecnologia independente e transparente para o mercado de consumo e produtos.
+                </p>
+            </div>
+
+            <div class="col-md-6 text-md-end">
+                <div class="d-flex flex-wrap gap-4 justify-content-md-end small">
+                    <a href="avaliacao-produtos/">App Avaliação de Produtos</a>
+                    <a href="politica-de-privacidade.html">Política de Privacidade</a>
+                    <a href="https://play.google.com/store/apps/details?id=br.com.prodit" target="_blank">Download Google Play</a>
+                </div>
+                <div class="small text-muted mt-3">
+                    © 2026 Prodit. Todos os direitos reservados.
                 </div>
             </div>
         </div>
@@ -531,11 +546,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    AOS.init({
-        once: true,
-        offset: 100,
-        duration: 800,
-    });
+    AOS.init({ once: true, duration: 700 });
 </script>
 </body>
 </html>

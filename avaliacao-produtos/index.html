@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prodit - Avaliação de Produtos | Escaneie e Descubra a Verdade</title>
+    <meta name="description" content="O app definitivo de avaliação de produtos. Aponte a câmera para o código de barras e descubra o veredito sincero de quem já comprou antes de passar no caixa.">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟧</text></svg>">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #FF5722;
+            --primary-hover: #F4511E;
+            --primary-light: rgba(255, 87, 34, 0.12);
+            --primary-gradient: linear-gradient(135deg, #FF5722 0%, #FF8A50 100%);
+            --dark: #0B0F19;
+            --dark-surface: #131B2E;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --radius-lg: 24px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: #FAFAFA;
+            overflow-x: hidden;
+        }
+
+        /* Top Announcement Bar */
+        .top-bar {
+            background: #0B0F19;
+            color: #E2E8F0;
+            font-size: 0.85rem;
+            padding: 8px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .top-bar a {
+            color: #FF8A50;
+            font-weight: 700;
+            text-decoration: none;
+            margin-left: 6px;
+        }
+        .top-bar a:hover { text-decoration: underline; }
+
+        /* Navbar */
+        .navbar {
+            padding: 1.2rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .brand-logo img {
+            height: 42px;
+            border-radius: 8px;
+        }
+        .brand-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Hero */
+        .hero {
+            background: radial-gradient(circle at 80% 20%, rgba(255, 87, 34, 0.08) 0%, transparent 50%), #FFFFFF;
+            padding: 90px 0 110px;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .lead {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 2.2rem;
+        }
+
+        /* Botão Play Store */
+        .btn-playstore {
+            display: inline-flex;
+            align-items: center;
+            background-color: #0F172A;
+            color: #FFFFFF !important;
+            border-radius: 14px;
+            padding: 14px 28px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+        }
+        .btn-playstore:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -10px rgba(255, 87, 34, 0.3);
+            background-color: #000;
+        }
+        .btn-playstore i {
+            font-size: 2.2rem;
+            margin-right: 14px;
+            color: #00E676;
+        }
+        .btn-text small {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            opacity: 0.8;
+        }
+        .btn-text strong {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        /* Mockup */
+        .app-mockup-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .app-mockup {
+            max-width: 320px;
+            border-radius: 36px;
+            box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.3);
+            border: 8px solid #0F172A;
+            animation: floatAnim 6s ease-in-out infinite;
+        }
+        @keyframes floatAnim {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: #FFFFFF;
+            padding: 12px 18px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid var(--border-color);
+            z-index: 3;
+        }
+        .badge-1 {
+            top: 25%;
+            left: -20px;
+            animation: floatAnim 5s ease-in-out infinite reverse;
+        }
+        .badge-2 {
+            bottom: 20%;
+            right: -25px;
+            animation: floatAnim 6.5s ease-in-out infinite;
+        }
+        .floating-badge .icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Features */
+        .feature-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+            border-color: rgba(255, 87, 34, 0.3);
+        }
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 24px;
+        }
+
+        /* CTA Box */
+        .cta-banner {
+            background: #0F172A;
+            border-radius: 28px;
+            padding: 60px 40px;
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 87, 34, 0.35) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        footer {
+            background: #0B0F19;
+            color: #94A3B8;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        footer a {
+            color: #E2E8F0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 991px) {
+            .hero { text-align: center; padding: 60px 0 80px; }
+            .hero h1 { font-size: 2.6rem; }
+            .floating-badge { display: none; }
+            .app-mockup { max-width: 250px; margin-top: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <span>Conheça o ecossistema <strong>Prodit</strong>.</span>
+    <a href="../"><i class="fas fa-arrow-left me-1"></i> Ir para o Portal Prodit</a>
+</div>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="brand-logo" href="./">
+            <img src="../assets/prodit_logo_dark.svg" alt="Prodit" style="height: 38px;">
+            <span class="brand-badge">Avaliação de Produtos</span>
+        </a>
+
+        <div class="ms-auto d-flex align-items-center gap-3">
+            <a href="https://play.google.com/store/apps/details?id=br.com.prodit" target="_blank" class="btn btn-warning rounded-pill fw-bold px-4 text-white" style="background-color: var(--primary); border: none;">
+                <i class="fab fa-google-play me-2"></i>Baixar App Grátis
+            </a>
+        </div>
+    </div>
+</nav>
+
+<header class="hero d-flex align-items-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7" data-aos="fade-right">
+                <span class="badge bg-light text-primary px-3 py-2 rounded-pill mb-3 fw-bold border">
+                    <i class="fas fa-barcode me-1"></i> O Veredito Real na Palma da Mão
+                </span>
+                <h1>Não compre no escuro.<br><span>Escaneie e descubra.</span></h1>
+                <p class="lead">
+                    O <strong>Prodit</strong> revela a verdade sobre qualquer produto no supermercado ou na farmácia. Aponte a câmera para o código de barras e veja avaliações sinceras de consumidores reais antes de gastar seu dinheiro.
+                </p>
+
+                <div class="d-flex flex-column flex-sm-row gap-3 align-items-start align-items-sm-center">
+                    <a href="https://play.google.com/store/apps/details?id=br.com.prodit" class="btn-playstore" target="_blank">
+                        <i class="fab fa-google-play"></i>
+                        <div class="btn-text">
+                            <small>Baixar agora no</small>
+                            <strong>Google Play Store</strong>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-4 pt-2 d-flex flex-wrap gap-4 text-muted small fw-semibold">
+                    <div><i class="fas fa-check-circle text-success me-1"></i> 100% Gratuito</div>
+                    <div><i class="fas fa-check-circle text-success me-1"></i> Sem Fake Reviews</div>
+                    <div><i class="fas fa-check-circle text-success me-1"></i> Leitura Ultra Rápida</div>
+                </div>
+            </div>
+
+            <div class="col-lg-5 text-center mt-5 mt-lg-0" data-aos="fade-left">
+                <div class="app-mockup-wrap">
+                    <img src="../assets/login.png" alt="Prodit App" class="app-mockup">
+                    <div class="floating-badge badge-1">
+                        <div class="icon bg-warning-subtle text-warning">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="text-start">
+                            <div class="fw-bold fs-6">4.8 / 5.0</div>
+                            <div class="small text-muted">Veredito da galera</div>
+                        </div>
+                    </div>
+                    <div class="floating-badge badge-2">
+                        <div class="icon bg-danger-subtle text-danger">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <div class="text-start">
+                            <div class="fw-bold fs-6">Tô Fora!</div>
+                            <div class="small text-muted">Lista Negra</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="py-5 bg-white border-bottom">
+    <div class="container py-4">
+        <div class="text-center max-w-700 mx-auto mb-5" data-aos="fade-up">
+            <h2 class="fw-bold fs-1 mb-3">Tudo o que você precisa antes de comprar</h2>
+            <p class="text-muted fs-5">Elimine o arrependimento pós-compra com a força da comunidade.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Escaneie o Código de Barras</h4>
+                    <p class="text-muted">Aponte a câmera do seu celular para o código EAN/GTIN do produto na prateleira. Em menos de 1 segundo a tela com notas e relatos se abre.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Opiniões Sem Filtro</h4>
+                    <p class="text-muted">Chega de promessas de embalagem. Leia relatos sinceros de quem realmente comprou, provou e testou no dia a dia.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Compartilhe no WhatsApp</h4>
+                    <p class="text-muted">Gostou ou odiou um produto? Gere um link direto com a ficha de avaliações e mande no grupo da família ou amigos com um toque.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" style="background: #F8FAFC;">
+    <div class="container py-4">
+        <div class="cta-banner shadow-lg text-center" data-aos="zoom-in">
+            <div class="position-relative" style="z-index: 2;">
+                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3">
+                    Disponível no Android
+                </span>
+                <h2 class="fw-bold display-5 mb-3">Pronto para nunca mais cair em ciladas?</h2>
+                <p class="lead text-white-50 max-w-600 mx-auto mb-4">
+                    Baixe o aplicativo oficial Prodit agora na Google Play Store. É rápido, leve e totalmente gratuito.
+                </p>
+
+                <div class="d-flex justify-content-center">
+                    <a href="https://play.google.com/store/apps/details?id=br.com.prodit" class="btn-playstore" target="_blank">
+                        <i class="fab fa-google-play"></i>
+                        <div class="btn-text">
+                            <small>Instale grátis pelo</small>
+                            <strong>Google Play</strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container text-center">
+        <div class="mb-4">
+            <img src="../assets/prodit_logo.svg" alt="Prodit" style="height: 38px; opacity: 0.95;">
+        </div>
+        <p class="small text-muted mb-3">Prodit © 2026. Feito com transparência para consumidores conscientes.</p>
+        <div class="d-flex justify-content-center gap-4 small">
+            <a href="../">Portal Prodit</a>
+            <a href="../politica-de-privacidade.html">Política de Privacidade</a>
+            <a href="https://play.google.com/store/apps/details?id=br.com.prodit" target="_blank">Google Play Store</a>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ once: true, duration: 800 });
+</script>
+</body>
+</html>
