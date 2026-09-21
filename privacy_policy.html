@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidade | Cruzadinhas: Roda de Palavras</title>
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
+      --primary-light: #e8f5e9;
+      --accent: #fbc02d;
+      --text: #2c3e50;
+      --text-muted: #607d8b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      color: var(--text);
+      background-color: var(--bg);
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .app-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #e0f2f1;
+      font-size: 1rem;
+    }
+
+    .lang-switcher {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active, .lang-btn:hover {
+      background: white;
+      color: var(--primary-dark);
+    }
+
+    .content {
+      padding: 36px 32px;
+    }
+
+    .meta-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+    }
+
+    .meta-box p {
+      margin: 4px 0;
+    }
+
+    h2 {
+      color: var(--primary-dark);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+
+    h3 {
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    ul {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .highlight-card {
+      background: #f1f8e9;
+      border: 1px solid #c8e6c9;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 20px 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 32px;
+      text-align: center;
+      background: #fafafa;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .lang-section {
+      display: block;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px 8px;
+      }
+      header {
+        padding: 28px 20px;
+      }
+      header h1 {
+        font-size: 1.6rem;
+      }
+      .content {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="app-badge">SIGS Games</div>
+      <h1 id="header-title">Política de Privacidade</h1>
+      <p id="header-subtitle">Cruzadinhas: Roda de Palavras / Crosswords: Word Wheel</p>
+      
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="switchLang('pt')">🇧🇷 Português</button>
+        <button class="lang-btn" onclick="switchLang('en')">🇺🇸 English</button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ==================== SEÇÃO PORTUGUÊS ==================== -->
+      <section id="section-pt" class="lang-section">
+        <div class="meta-box">
+          <p><strong>Aplicativo:</strong> Cruzadinhas: Roda de Palavras (Crosswords: Word Wheel)</p>
+          <p><strong>Identificador do Pacote:</strong> <code>br.com.sigs.palavras_cruzadas</code></p>
+          <p><strong>Desenvolvedor:</strong> SIGS</p>
+          <p><strong>Data de Vigência:</strong> 5 de setembro de 2026</p>
+        </div>
+
+        <p>A sua privacidade é prioridade para a <strong>SIGS</strong>. Esta Política de Privacidade descreve como as informações são coletadas, utilizadas e protegidas quando você instala e joga <strong>Cruzadinhas: Roda de Palavras</strong>.</p>
+
+        <h2>1. Resumo Fundamental de Privacidade</h2>
+        <div class="highlight-card">
+          <p><strong>🔒 Nós não exigimos cadastro nem coletamos dados pessoais diretos:</strong> Você não precisa criar uma conta, informar seu nome, e-mail, telefone, CPF ou qualquer dado sensível para jogar Cruzadinhas. O jogo foi desenhado para ser desfrutado de forma segura, anônima e relaxante.</p>
+        </div>
+
+        <h2>2. Dados Armazenados Localmente no seu Aparelho</h2>
+        <p>Para garantir a persistência das suas conquistas, o aplicativo armazena dados unicamente na memória interna do seu próprio dispositivo (armazenamento local):</p>
+        <ul>
+          <li><strong>Progresso do Jogo:</strong> Fases concluídas, estrelas, mundos desbloqueados e palavras encontradas.</li>
+          <li><strong>Economia do Jogo:</strong> Saldo de moedas obtidas por vitórias, bônus ou vídeos assistidos.</li>
+          <li><strong>Configurações Pessoais:</strong> Idioma selecionado (Português, Inglês, Espanhol, Francês, Alemão ou Italiano), som, música e preferências de vibração háptica.</li>
+        </ul>
+        <p><em>Esses dados nunca são enviados a servidores externos próprios e podem ser completamente apagados caso você desinstale o app ou limpe os dados do app nas configurações do Android.</em></p>
+
+        <h2>3. Serviços de Terceiros e Publicidade</h2>
+        <p>O aplicativo utiliza serviços de terceiros confiáveis para exibir anúncios, processar eventuais compras e monitorar estabilidade:</p>
+
+        <h3>A. Google AdMob (Rede de Anúncios)</h3>
+        <p>Utilizamos a plataforma <strong>Google AdMob</strong> para exibir anúncios em formato de Banner, Intersticial e Vídeos Premiados (onde você assiste voluntariamente para ganhar 50 moedas de jogo).</p>
+        <p>O SDK do Google AdMob pode coletar e processar identificadores anônimos para fins de publicidade e análise de desempenho, incluindo:</p>
+        <ul>
+          <li>Identificador de Publicidade do Google (Advertising ID / GAID);</li>
+          <li>Endereço IP aproximado (nível de cidade/região para geolocalização de anúncios);</li>
+          <li>Informações técnicas do dispositivo (modelo, versão do sistema operacional Android, idioma configurado);</li>
+          <li>Estatísticas de interação com anúncios e dados de diagnóstico.</li>
+        </ul>
+        <p>Para mais informações sobre como o Google trata esses dados, consulte a <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidade e Termos do Google</a>.</p>
+
+        <h3>B. Faturamento do Google Play (Google Play In-App Billing)</h3>
+        <p>Caso você opte por adquirir o <em>Passe VIP Ilimitado</em> ou remover anúncios, a transação é processada diretamente pelo <strong>Google Play Billing</strong>. A SIGS não tem acesso, não coleta e não armazena os seus dados de pagamento ou cartão de crédito.</p>
+
+        <h2>4. Controle de Anúncios e Como Desativar a Personalização</h2>
+        <p>Você pode controlar ou desativar anúncios personalizados a qualquer momento diretamente no seu aparelho Android:</p>
+        <ul>
+          <li>Acesse: <strong>Configurações</strong> do aparelho &gt; <strong>Google</strong> &gt; <strong>Anúncios</strong>;</li>
+          <li>Toque em <strong>"Redefinir ID de publicidade"</strong> ou <strong>"Excluir ID de publicidade"</strong>.</li>
+        </ul>
+
+        <h2>5. Conformidade com a LGPD (Lei Geral de Proteção de Dados - Brasil)</h2>
+        <p>Em total respeito à Lei nº 13.709/2018 (LGPD), asseguramos que nenhum dado pessoal sensível é coletado ou comercializado por nós. Os identificadores técnicos processados pelas bibliotecas do Google são utilizados exclusivamente sob as bases legais de execução de serviço, legítimo interesse e consentimento do usuário para anúncios.</p>
+
+        <h2>6. Privacidade de Crianças (Família e COPPA)</h2>
+        <p>O jogo <strong>Cruzadinhas: Roda de Palavras</strong> é um quebra-cabeça de vocabulário seguro e voltado para todas as idades (classificação indicativa Livre). Não coletamos intencionalmente informações identificáveis de crianças menores de 13 anos. Nossos blocos de anúncios são configurados segundo as diretrizes de conteúdo familiar do Google AdMob.</p>
+
+        <h2>7. Segurança da Informação</h2>
+        <p>Empregamos padrões rigorosos de segurança e utilizamos apenas as bibliotecas oficiais fornecidas e auditadas pelo Google. Como não mantemos servidores com banco de dados de usuários, o risco de vazamento de informações cadastrais é nulo.</p>
+
+        <h2>8. Alterações nesta Política</h2>
+        <p>Esta política pode ser atualizada periodicamente para refletir melhorias no jogo ou alterações legislativas. Quaisquer revisões entrarão em vigor imediatamente após sua publicação nesta página.</p>
+
+        <h2>9. Canal de Contato e Dúvidas</h2>
+        <p>Se você tiver quaisquer dúvidas, sugestões ou solicitações relacionadas a esta Política de Privacidade, entre em contato com nossa equipe:</p>
+        <ul>
+          <li><strong>Desenvolvedor:</strong> SIGS Games</li>
+          <li><strong>E-mail de Suporte:</strong> <a href="mailto:contato@sigs.com.br">contato@sigs.com.br</a></li>
+          <li><strong>Localização:</strong> São Paulo - SP, Brasil</li>
+        </ul>
+      </section>
+
+
+      <!-- ==================== ENGLISH SECTION ==================== -->
+      <section id="section-en" class="lang-section hidden">
+        <div class="meta-box">
+          <p><strong>Application:</strong> Crosswords: Word Wheel (Cruzadinhas: Roda de Palavras)</p>
+          <p><strong>Package ID:</strong> <code>br.com.sigs.palavras_cruzadas</code></p>
+          <p><strong>Developer:</strong> SIGS</p>
+          <p><strong>Effective Date:</strong> September 5, 2026</p>
+        </div>
+
+        <p>Your privacy is of utmost importance to <strong>SIGS</strong>. This Privacy Policy explains how information is collected, used, and protected when you install and play <strong>Crosswords: Word Wheel</strong>.</p>
+
+        <h2>1. Fundamental Privacy Summary</h2>
+        <div class="highlight-card">
+          <p><strong>🔒 We do not require registration or collect personal data:</strong> You are not required to create an account, provide your name, email, phone number, or any sensitive personal data to play. The game is designed to be enjoyed safely, anonymously, and relaxing.</p>
+        </div>
+
+        <h2>2. Data Stored Locally on Your Device</h2>
+        <p>To ensure your game achievements and settings are preserved, the application stores data solely in your device's local internal storage:</p>
+        <ul>
+          <li><strong>Game Progress:</strong> Completed crossword levels, stars, unlocked worlds, and found words.</li>
+          <li><strong>Coin Economy:</strong> Coin balance gained through victories, welcome bonuses, or voluntary rewarded ads.</li>
+          <li><strong>User Preferences:</strong> Selected language (English, Portuguese, Spanish, French, German, Italian), sound effects, music, and haptic vibration preferences.</li>
+        </ul>
+        <p><em>This data is never transmitted to private external servers and is entirely deleted if you uninstall the app or clear app data in Android settings.</em></p>
+
+        <h2>3. Third-Party Services and Advertising</h2>
+        <p>The application integrates trusted third-party SDKs to serve ads, process in-app purchases, and monitor performance:</p>
+
+        <h3>A. Google AdMob (Ad Network)</h3>
+        <p>We use <strong>Google AdMob</strong> to display Banner, Interstitial, and Rewarded Video ads (where players voluntarily watch an ad to earn 50 in-game coins).</p>
+        <p>The Google AdMob SDK may collect and process anonymous device identifiers for advertising and analytics purposes, such as:</p>
+        <ul>
+          <li>Google Advertising ID (GAID / AAID);</li>
+          <li>Approximate IP address (city/regional level for localized ads);</li>
+          <li>Technical device information (hardware model, Android OS version, system language);</li>
+          <li>Ad interaction diagnostics and performance metrics.</li>
+        </ul>
+        <p>For more information on how Google processes this data, please visit <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy & Terms</a>.</p>
+
+        <h3>B. Google Play In-App Billing</h3>
+        <p>If you choose to purchase the <em>Unlimited VIP Pass</em> or remove ads, the transaction is handled directly and securely by <strong>Google Play Billing</strong>. SIGS does not receive, collect, or store any financial or credit card information.</p>
+
+        <h2>4. Opting Out of Personalized Advertising</h2>
+        <p>You can manage or opt out of personalized ads at any time via your Android device settings:</p>
+        <ul>
+          <li>Go to: <strong>Settings</strong> &gt; <strong>Google</strong> &gt; <strong>Ads</strong>;</li>
+          <li>Tap <strong>"Reset advertising ID"</strong> or <strong>"Delete advertising ID"</strong>.</li>
+        </ul>
+
+        <h2>5. GDPR and International Compliance</h2>
+        <p>In accordance with international privacy regulations including the European GDPR and Brazilian LGPD, no personally identifiable data is sold or commercially exploited. Technical identifiers processed by Google SDKs adhere strictly to legitimate interest, service delivery, and user consent principles.</p>
+
+        <h2>6. Children's Privacy (COPPA Compliant)</h2>
+        <p><strong>Crosswords: Word Wheel</strong> is a family-friendly vocabulary puzzle game suitable for all ages. We do not knowingly collect personal information from children under 13 years of age. All advertisements served via Google AdMob adhere to Google Play Families Policy guidelines.</p>
+
+        <h2>7. Contact and Inquiries</h2>
+        <p>If you have any questions or suggestions regarding this Privacy Policy, please feel free to reach out to our team:</p>
+        <ul>
+          <li><strong>Developer:</strong> SIGS Games</li>
+          <li><strong>Support Email:</strong> <a href="mailto:contato@sigs.com.br">contato@sigs.com.br</a></li>
+          <li><strong>Location:</strong> São Paulo - SP, Brazil</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <footer>
+      &copy; 2026 SIGS Games. Todos os direitos reservados. / All rights reserved.<br>
+      Cruzadinhas: Roda de Palavras &bull; Crosswords: Word Wheel
+    </footer>
+  </div>
+
+  <script>
+    function switchLang(lang) {
+      const sectionPt = document.getElementById('section-pt');
+      const sectionEn = document.getElementById('section-en');
+      const headerTitle = document.getElementById('header-title');
+      const btns = document.querySelectorAll('.lang-btn');
+
+      btns.forEach(b => b.classList.remove('active'));
+
+      if (lang === 'en') {
+        sectionPt.classList.add('hidden');
+        sectionEn.classList.remove('hidden');
+        headerTitle.textContent = 'Privacy Policy';
+        btns[1].classList.add('active');
+        document.documentElement.lang = 'en';
+      } else {
+        sectionEn.classList.add('hidden');
+        sectionPt.classList.remove('hidden');
+        headerTitle.textContent = 'Política de Privacidade';
+        btns[0].classList.add('active');
+        document.documentElement.lang = 'pt-BR';
+      }
+    }
+  </script>
+</body>
+</html>
