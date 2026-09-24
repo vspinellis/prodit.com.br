@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worklane — Native macOS Project & Time Workspace for Solo Makers</title>
+  <meta name="description" content="Worklane is the ultra-fast, native macOS project workspace built for solo developers, freelancers, and small studios. Gantt timeline, 24h calendar, rich markdown, ⌘V screenshot attachments, Kanban, and private Apple iCloud sync. Pay once, own forever.">
+  <meta name="keywords" content="macos project management, mac task manager, solo developer workspace, gantt chart mac, icloud sync tasks, freelance project manager, native mac app, worklane">
+  <link rel="canonical" href="https://prodit.com.br/worklane/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://prodit.com.br/worklane/">
+  <meta property="og:title" content="Worklane — Native macOS Project & Time Workspace for Solo Makers">
+  <meta property="og:description" content="Pay once, own forever. Continuous timeline Gantt, 24h hourly calendar, markdown notes, ⌘V screenshot attachments, and private Apple iCloud sync.">
+  <meta property="og:image" content="https://prodit.com.br/worklane/assets/app_icon.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://prodit.com.br/worklane/">
+  <meta name="twitter:title" content="Worklane — Native macOS Project Workspace">
+  <meta name="twitter:description" content="The command center for solo makers on macOS. No monthly fees, 100% private iCloud storage.">
+  <meta name="twitter:image" content="https://prodit.com.br/worklane/assets/app_icon.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="128x128" href="./assets/app_icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/app_icon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Schema.org SoftwareApplication JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Worklane",
+    "operatingSystem": "macOS 14.0 or later",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "19.99",
+      "priceCurrency": "USD"
+    },
+    "description": "Native macOS project and time management workspace for solo developers and freelancers with Gantt timeline, 24h calendar, and Apple iCloud sync.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prodit Inovação Digital",
+      "url": "https://prodit.com.br"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #07090e;
+      --surface: #0e1320;
+      --surface-hover: #141b2d;
+      --card-bg: rgba(19, 28, 46, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(56, 189, 248, 0.3);
+      --accent: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-purple: #c084fc;
+      --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      letter-spacing: -0.015em;
+    }
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Ambient Lighting */
+    .glow-sphere {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.18;
+    }
+    .glow-1 {
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, #38bdf8, #818cf8);
+    }
+    .glow-2 {
+      top: 1400px;
+      right: -100px;
+      background: radial-gradient(circle, #c084fc, #38bdf8);
+    }
+
+    /* Header / Navbar */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      background: rgba(7, 9, 14, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 16px 0;
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-link img {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .brand-text strong {
+      font-size: 1.15rem;
+      font-weight: 800;
+      display: block;
+      line-height: 1.1;
+    }
+    .brand-text span {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-link:hover {
+      color: var(--text);
+    }
+    .btn-appstore-nav {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-appstore-nav:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 90px 0 60px;
+      text-align: center;
+      z-index: 1;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    h1.hero-title {
+      font-size: 3.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 22px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .text-gradient {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .btn-primary-mac {
+      background: #ffffff;
+      color: #07090e;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+      transition: all 0.25s ease;
+    }
+    .btn-primary-mac:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.25);
+      background: #f1f5f9;
+    }
+    .btn-secondary-mac {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s;
+    }
+    .btn-secondary-mac:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .trust-badge-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .trust-badge-item i {
+      color: var(--accent);
+    }
+
+    /* App Preview Window */
+    .app-preview-wrapper {
+      margin: 60px auto 0;
+      max-width: 1040px;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 10px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+    .mac-window-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mac-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-close { background: #ff5f56; }
+    .dot-min { background: #ffbd2e; }
+    .dot-max { background: #27c93f; }
+    .mac-window-title {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Interactive / Visual App Simulation */
+    .app-mock-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 480px;
+      background: #080c16;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: left;
+    }
+    .mock-sidebar {
+      background: rgba(14, 19, 32, 0.85);
+      border-right: 1px solid var(--border);
+      padding: 20px 14px;
+      font-size: 0.85rem;
+    }
+    .mock-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .mock-nav-item.active {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent);
+    }
+    .mock-section-title {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: rgba(148, 163, 184, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 14px 12px 6px;
+    }
+    .mock-main {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mock-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mock-timeline-lane {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mock-task-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Section Styling */
+    section.features-section {
+      padding: 100px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 740px;
+      margin: 0 auto 60px;
+    }
+    .section-tag {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .section-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+    }
+
+    /* Feature Cards Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 22px;
+    }
+    .feature-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* Comparison Box */
+    .comparison-section {
+      padding: 80px 0;
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(14, 19, 32, 0.6) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-table-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .comparison-row.header {
+      background: rgba(255, 255, 255, 0.03);
+      font-weight: 800;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .comparison-row:last-child {
+      border-bottom: none;
+    }
+    .highlight-column {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 90px 0;
+    }
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .faq-item h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .faq-item p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      padding: 100px 0;
+      text-align: center;
+      background: radial-gradient(ellipse at bottom, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+    }
+    .final-cta h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    /* Footer */
+    footer.site-footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      h1.hero-title { font-size: 2.6rem; }
+      .app-mock-grid { grid-template-columns: 1fr; }
+      .mock-sidebar { display: none; }
+      .comparison-row { grid-template-columns: 1.5fr 1fr 1fr; font-size: 0.85rem; padding: 14px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-sphere glow-1"></div>
+  <div class="glow-sphere glow-2"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-nav">
+      <a href="./" class="brand-link">
+        <img src="assets/app_icon.png" alt="Worklane Icon">
+        <div class="brand-text">
+          <strong>Worklane</strong>
+          <span>SOLO WORKSPACE</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#comparison" class="nav-link">Pricing</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="terms.html" class="nav-link">Privacy</a>
+        <a href="https://apps.apple.com/app/worklane/id000000000" class="btn-appstore-nav" target="_blank">
+          <i class="fab fa-apple"></i> Mac App Store
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="pill">
+        <i class="fab fa-apple"></i> Built Exclusively for macOS Sonoma & Sequoia
+      </div>
+
+      <h1 class="hero-title">
+        The project workspace for<br>
+        <span class="text-gradient">those who execute alone.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Tired of bloated enterprise trackers and endless monthly subscriptions? Worklane gives solo developers and freelancers a lightning-fast, native macOS command center with Gantt timelines, 24h hourly scheduling, and zero server fees.
+      </p>
+
+      <div class="cta-group">
+        <a href="https://apps.apple.com/app/worklane/id000000000" class="btn-primary-mac" target="_blank">
+          <i class="fab fa-apple"></i> Download on the Mac App Store
+        </a>
+        <a href="#features" class="btn-secondary-mac">
+          <i class="fas fa-play"></i> Explore All Features
+        </a>
+      </div>
+
+      <div class="trust-badges">
+        <span class="trust-badge-item"><i class="fas fa-check-circle"></i> Pay Once, Own Forever</span>
+        <span class="trust-badge-item"><i class="fas fa-shield-alt"></i> Private Apple iCloud Sync</span>
+        <span class="trust-badge-item"><i class="fas fa-bolt"></i> 100% Native Swift & SQLite</span>
+        <span class="trust-badge-item"><i class="fas fa-moon"></i> Light & Dark Mode</span>
+      </div>
+
+      <!-- App Interface Preview -->
+      <div class="app-preview-wrapper">
+        <div class="mac-window-bar">
+          <div class="mac-dot dot-close"></div>
+          <div class="mac-dot dot-min"></div>
+          <div class="mac-dot dot-max"></div>
+          <div class="mac-window-title">Worklane — Timeline & Projects</div>
+        </div>
+
+        <div class="app-mock-grid">
+          <!-- Sidebar -->
+          <div class="mock-sidebar">
+            <div class="mock-section-title">Timeline</div>
+            <div class="mock-nav-item active"><i class="fas fa-stream"></i> Horizontal Gantt</div>
+            <div class="mock-nav-item"><i class="fas fa-clock"></i> Day (24 Hours)</div>
+            <div class="mock-nav-item"><i class="fas fa-calendar-alt"></i> Week & Month</div>
+
+            <div class="mock-section-title">Execution</div>
+            <div class="mock-nav-item"><i class="fas fa-tasks"></i> All Tasks</div>
+            <div class="mock-nav-item"><i class="fas fa-columns"></i> Kanban Board</div>
+            <div class="mock-nav-item"><i class="fas fa-folder"></i> Focused Projects</div>
+            <div class="mock-nav-item"><i class="fas fa-building"></i> Clients & Brands</div>
+            <div class="mock-nav-item"><i class="fas fa-video"></i> Meetings & Q&A</div>
+
+            <div style="margin-top: 50px; font-size: 0.75rem; color: #10B981;">
+              <i class="fas fa-check-circle"></i> iCloud Synced
+            </div>
+          </div>
+
+          <!-- Main View -->
+          <div class="mock-main">
+            <div class="mock-topbar">
+              <div>
+                <h3 style="font-size: 1.2rem; font-weight: 800;">Horizontal Delivery Timeline</h3>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Current Sprint & Client Milestones</span>
+              </div>
+              <div style="background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem;">
+                ⌘K Quick Search
+              </div>
+            </div>
+
+            <!-- Gantt Swimlanes -->
+            <div class="mock-timeline-lane">
+              <div style="font-size: 0.78rem; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">
+                📁 Worklane for macOS (Internal SaaS)
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <div class="mock-task-bar" style="background: linear-gradient(135deg, #0284c7, #38bdf8); width: 60%;">
+                  <i class="fas fa-code"></i> SwiftData CloudKit Architecture (14h)
+                </div>
+                <div class="mock-task-bar" style="background: rgba(255,255,255,0.08); width: 35%;">
+                  <i class="fas fa-eye"></i> Mac App Store QA
+                </div>
+              </div>
+            </div>
+
+            <div class="mock-timeline-lane">
+              <div style="font-size: 0.78rem; font-weight: 700; color: #818cf8; margin-bottom: 8px;">
+                💼 Apex Studio (Client Freelance Contract)
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <div class="mock-task-bar" style="background: linear-gradient(135deg, #6366f1, #818cf8); width: 45%;">
+                  <i class="fas fa-paint-brush"></i> UI Checkout Redesign (6h)
+                </div>
+                <div class="mock-task-bar" style="background: linear-gradient(135deg, #f59e0b, #fbbf24); width: 40%; color: #000;">
+                  <i class="fas fa-file-alt"></i> Status Report & PR Review
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Engineered for Focus</span>
+        <h2 class="section-title">Everything you need to deliver,<br>nothing you don't.</h2>
+        <p class="section-desc">Designed strictly around the workflow of solo creators, freelancers, and agile consultants.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-stream"></i></div>
+          <h3>Horizontal Gantt Timeline</h3>
+          <p>Continuous swimlanes grouped by Project and Client. Clearly spot delivery overlaps, adjust deadlines, and visualize your entire roadmap across weeks and months without messy tables.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-calendar-day"></i></div>
+          <h3>24-Hour Hourly Calendar</h3>
+          <p>Time-block your actual day with an anti-overlap hourly scheduler. Simultaneously scheduled jobs are dynamically shifted side-by-side, color-coded by your project's accent.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-file-code"></i></div>
+          <h3>Native Rich Markdown</h3>
+          <p>Ditch plain raw text. Document bugs, PR details, and specifications with hierarchical headers, interactive checklists <code>- [ ]</code>, monospace syntax blocks, and instant Live Preview.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-camera"></i></div>
+          <h3>Paste Screenshots (⌘V)</h3>
+          <p>Hit ⌘V directly in any task to attach problem screenshots from your clipboard. Attach links to Figma, GitHub pull requests, or design files with responsive thumbnail previews.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-columns"></i></div>
+          <h3>Kanban & 1-Click Status Reports</h3>
+          <p>Organize execution with To Do, In Progress, Review, and Completed columns. Generate a ready-to-copy formatted status report to send to your clients in seconds.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-video"></i></div>
+          <h3>Meeting Notes & Decision Q&A</h3>
+          <p>Store meeting agendas, video call URLs (Google Meet, Zoom, Teams), and a structured Questions & Answers log so commitments and decisions are never lost.</p>
+        </div>
+
+        <!-- Feature 7 -->
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-search"></i></div>
+          <h3>Global Quick Search (⌘K)</h3>
+          <p>Jump to any task, project, client, or meeting minute instantaneously with Spotlight-like speed. Navigate your entire workload purely from the keyboard.</p>
+        </div>
+
+        <!-- Feature 8 -->
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-cloud"></i></div>
+          <h3>Apple iCloud & SwiftData</h3>
+          <p>Fast native SQLite database backed by automatic Apple CloudKit synchronization. Works flawlessly offline, and syncs across all your Macs under your personal Apple ID.</p>
+        </div>
+
+        <!-- Feature 9 -->
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-globe"></i></div>
+          <h3>Bilingual (EN / PT-BR)</h3>
+          <p>Seamlessly toggle between English and Brazilian Portuguese directly from the sidebar footer. Automatic macOS system language detection included.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison / Pricing -->
+  <section id="comparison" class="comparison-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Honest Pricing</span>
+        <h2 class="section-title">Buy it once. Own it forever.</h2>
+        <p class="section-desc">Why pay \$120 to \$240 every single year for corporate bloatware when you can own your workspace outright?</p>
+      </div>
+
+      <div class="comparison-table-wrapper">
+        <div class="comparison-row header">
+          <div>Feature</div>
+          <div class="highlight-column">Worklane</div>
+          <div>Corporate SaaS</div>
+        </div>
+        <div class="comparison-row">
+          <div>Pricing Model</div>
+          <div class="highlight-column">Single Purchase ($19.99 / R$ 99,90)</div>
+          <div>$10 - $20 / month ($120+/year)</div>
+        </div>
+        <div class="comparison-row">
+          <div>Data Storage & Privacy</div>
+          <div class="highlight-column">Local SQLite + Apple iCloud</div>
+          <div>Third-party cloud servers</div>
+        </div>
+        <div class="comparison-row">
+          <div>Offline Functionality</div>
+          <div class="highlight-column">100% Full Offline Access</div>
+          <div>Limited / Web-reliant</div>
+        </div>
+        <div class="comparison-row">
+          <div>Ads & Telemetry Tracking</div>
+          <div class="highlight-column">Zero Tracking / Zero Ads</div>
+          <div>Behavioral analytics</div>
+        </div>
+        <div class="comparison-row">
+          <div>Platform Optimization</div>
+          <div class="highlight-column">Native macOS (SwiftUI & Swift 6)</div>
+          <div>Heavy Electron / Web Wrapper</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Frequently Asked Questions</span>
+        <h2 class="section-title">Got questions? We've got answers.</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4>Are there any hidden monthly fees or subscriptions?</h4>
+          <p>None. Worklane is a traditional, honest one-time purchase on the Mac App Store. Once you buy it, you own it forever with no recurring bills.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How does iCloud synchronization work?</h4>
+          <p>Worklane uses Apple's official CloudKit framework integrated into SwiftData. Your tasks, clients, and timelines are mirrored securely to your private iCloud container (<code>iCloud.br.com.prodit.worklane</code>). We do not host external databases and have no access to your files.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What are the system requirements?</h4>
+          <p>Worklane requires a Mac running macOS 14.0 (Sonoma) or macOS 15.0 (Sequoia) or later. It runs natively on both Apple Silicon (M1/M2/M3/M4) and Intel Macs.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I use Worklane offline?</h4>
+          <p>Yes, absolutely. Because Worklane uses a local SQLite database, you can create, edit, and organize all your projects and tasks without any internet connection. As soon as your Mac reconnects, iCloud replicates changes automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Ready to take command of your projects?</h2>
+      <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto 36px;">
+        Join independent developers, designers, and consultants who execute on their own terms.
+      </p>
+      <a href="https://apps.apple.com/app/worklane/id000000000" class="btn-primary-mac" target="_blank">
+        <i class="fab fa-apple"></i> Get Worklane on the Mac App Store
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Worklane</strong> • A product by <a href="https://prodit.com.br" style="color: #fff; text-decoration: none;">Prodit Inovação Digital</a>.
+      </div>
+      <div class="footer-links">
+        <a href="terms.html">Privacy & Terms</a>
+        <a href="mailto:contato@prodit.com.br">Support</a>
+        <a href="https://prodit.com.br">Prodit Home</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
